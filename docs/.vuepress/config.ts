@@ -47,10 +47,10 @@ export default defineUserConfig({
   // configure default theme
   theme: defaultTheme({
     logo: '/images/hero.png',
-    repo: 'DongshanPI/Canaan-Docs',
+    repo: '100askTeam/Renesas-Docs',
     docsDir: 'docs',
-    docsRepo: 'https://github.com/100askTeam/Canaan-Docs',
-    docsBranch: 'main',
+    docsRepo: 'https://github.com/100askTeam/Renesas-Docs',
+    docsBranch: 'master',
     editLink: true,
     editLinkPattern: ':repo/edit/:branch/:path',
     sidebarDepth: 0,
