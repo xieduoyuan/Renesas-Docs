@@ -1,6 +1,6 @@
 
 # 站点简介
-  此站点基于百问网推出的嘉楠科技 开发板编写的开发文档，主要用于大家学习参考使用，网站使用 GPLV3 & CC4.0 协议，转载请注明 [renesas-docs.100ask.net](renesas-docs.100ask.net)
+  此站点基于百问网推出的[瑞萨](https://www.renesas.cn)开发板而编写的开发文档，主要用于大家学习参考使用，网站使用 GPLV3 & CC4.0 协议，转载请注明 [renesas-docs.100ask.net](http://renesas-docs.100ask.net)
   
   此网站支持 
   * [DShanMCU-RA6M5开发板](https://item.taobao.com/item.htm?id=728461040949)
