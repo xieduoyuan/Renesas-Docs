@@ -3700,12 +3700,11 @@ void app_lvgl_test(void)
 <div STYLE="page-break-after: always;"></div>
 
 
-<img src="./images/wechat_official_account_renesas-mcu.jpg" alt="wechat_official_account_renesas-mcu" style="zoom: 33%;" />
+<img src="http://photos.100ask.net/renesas-docs/wechat_official_account_renesas-mcu.jpg" alt="wechat_official_account_renesas-mcu" style="zoom: 33%;" />
 
 <center>瑞萨MCU小百科微信公众号</center>
 
 
-
-<img src="./images/wechat_official_account_100ask.jpg" alt="wechat_official_account_100ask" style="zoom:33%;" />
+<img src="http://photos.100ask.net/renesas-docs/wechat_official_account_100ask.jpg" alt="wechat_official_account_100ask" style="zoom:33%;" />
 
 <center>深圳百问网微信公众号</center>
