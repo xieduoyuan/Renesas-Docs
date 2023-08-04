@@ -95,6 +95,8 @@
 - 调试器转接线接到板子上要确保，板子上两排排针都已经接上，没有裸露出来的排针(参考上面第2步接线图)。
 - 将e2studio中原有的debug配置删除之后，再新建自己的debug配置。
 - 如果出现调试器无法工作的情况，将调试器接到电脑的usb线重新插拔，并且删除、新建debug配置之后再重新尝试。
+- 如果上述方法都未解决问题，请检查硬件接线是否正确。之后在e2stduio中检查 `Debug Configuration...->(选择相应的debug配置文件)->Debugger->Connection Settings` 中的 **TrustZone** 是否为 **No**。
+- 最后，如果仍未解决问题，请在社区留言： [https://forums.100ask.net/c/renesas/ra6m5/78](https://forums.100ask.net/c/renesas/ra6m5/78)
 
 -----
 
