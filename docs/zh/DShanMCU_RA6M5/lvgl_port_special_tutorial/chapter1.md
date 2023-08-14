@@ -21,25 +21,32 @@
 
 | 名称                          | 数量 |
 | :----------------------------- | :---- |
-| [DShanMCU-RA6M5开发板](https://item.taobao.com/item.htm?id=728461040949)         | 1    |
-| 瑞萨 EZ-CUBE3 MCU调试器/烧录器 | 1 |
-| 调试器转接线 | 1 |
-| 320*480分辨率3.5寸带触摸LCD屏 | 1    |
-| EC11旋转编码器                   | 1     |
-| 公对母杜邦线 | 1(排) |
-| USB Type-C数据线 | 1 |
+| [DShanMCU-RA6M5开发板（板载DAP）](https://item.taobao.com/item.htm?id=728461040949)         | 1块    |
+| 320*480分辨率3.5寸带触摸LCD屏 | 1块    |
+| 瑞萨 EZ-CUBE3 MCU调试器/烧录器(可选) | 1个 |
+| EZ-CUBE3调试器转接线(可选) | 1根 |
+| USB Type-C数据线          | 1根     |
+| MB-102面包板          | 1块     |
+| 面包板线         | 1扎(65根)     |
+| 按键          | 10个     |
+| 单色LED灯(红、绿、蓝各3个)          | 共9个     |
+| 220欧电阻            | 10个     |
+| EC11旋转编码器模块            | 1个     |
 
-> DShanMCU-RA6M5开发板购买链接： [https://item.taobao.com/item.htm?id=728461040949](https://item.taobao.com/item.htm?id=728461040949)
 
-套件所有内容，如下图所示：
+> 上面表格中除去可选部分的其他硬件可以在这里获取(选LVGL学习套餐)： [https://item.taobao.com/item.htm?id=728461040949](https://item.taobao.com/item.htm?id=728461040949)
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-1/chapter-1_001.png" alt="chapter-1_001" style="zoom: 67%;" />
+套件所有内容(不包含可选部分)，如下图所示：
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-1/chapter-1_001-1.jpg" alt="chapter-1_001" style="zoom: 67%;" />
 
 
 
 ### 1.4.1 硬件接线
 
 1. DShanMCU-RA6M5开发板和屏幕的接线，默认是已经接好，不需要额外接线。
+
+> 如果使用板载DAP并且不使用EZ-CUBE3，则不需要阅读下面2-5点。板载DAP的配置请阅读：[在e2studio中使用DAP进行开发调试](../e2studio_use_dap/chapter1.md)
 
 2. DShanMCU-RA6M5开发板和调试器转接线接线，按照下图接好：
 
@@ -65,7 +72,9 @@
 
 <img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-1/chapter-1_005.png" alt="chapter-1_005" style="zoom: 67%;" />
 
-## 1.5 调试器使用注意事项
+## 1.5 EZ-CUBE3调试器使用注意事项
+
+> 如果使用板载DAP并且不使用EZ-CUBE3，则不需要阅读这里。板载DAP的配置请阅读：[在e2studio中使用DAP进行开发调试](../e2studio_use_dap/chapter1.md)
 
 - 调试器连接到电脑不要通过usb hub(供电不稳定)。
 - 调试器并没有对板子供电，因此板子要额外单独供电。

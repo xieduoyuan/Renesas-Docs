@@ -57,6 +57,8 @@
 
 ### 2.1.2 调试器配置
 
+这里说的调试器是 [瑞萨 EZ-CUBE3 MCU调试器](https://www.renesas.cn/cn/zh/software-tool/ez-cube3)。如果你使用板载DAP，则不需要阅读本小节内容(跳过这里，从 2.1.3 小节继续阅读)。板载DAP的配置请阅读： [在e2studio中使用DAP进行开发调试](../e2studio_use_dap/chapter1.md)。
+
 > 调试器使用注意点： 
 > 1. 调试器连接到电脑不要通过usb hub(供电不稳定)。
 > 2. 调试器并没有对板子供电，因此板子要额外单独供电。
