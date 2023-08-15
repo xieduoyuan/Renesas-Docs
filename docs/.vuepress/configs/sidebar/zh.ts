@@ -32,6 +32,7 @@ export const sidebarZh: SidebarConfig = {
       text: 'LVGL移植专题',
       collapsible: true,
       children: [
+        '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/README.md',
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter1.md',
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter2.md',
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter3.md',

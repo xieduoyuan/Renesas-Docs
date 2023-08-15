@@ -12,7 +12,7 @@ export const navbarZh: NavbarConfig = [
   },
   {
     text: 'LVGL移植专题',
-    link: '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter1.md',
+    link: '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/README.md',
   },
   {
     text: `瑞萨系列`,
