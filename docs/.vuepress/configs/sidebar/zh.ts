@@ -7,6 +7,8 @@ export const sidebarZh: SidebarConfig = {
       collapsible: true,
       children: [
         '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/README.md',
+        '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter1.md',
+        '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter2.md',
       ],
     },
   ],
