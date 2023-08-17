@@ -236,3 +236,297 @@ void main(void)
 - 第 35 行的 main 函数，在初始化 g_lcd 后就可以直接使用了，效率更高。
 
 使用面向对象的思想，把硬件的操作封装在一个结构体里，甚至把一个业务的操作封装在一个结构体里。初次接触这种风格的代码时，不容易理解。特别是在比较复杂的系统里，这些封装的层次更多，层层封装和多次跳转之下程序更难理解。但是一旦理解之后，就会发现程序设计的精妙。一旦习惯了面向对象的编程方法，你就不会再使用面向过程的编程方法。
+
+## 2.2 面向对象的程序设计方法
+
+在《代码大全》第 5 章中，把程序设计分为这几个层次：
+
+- 第 1 层：软件系统，就是整个系统、整个程序
+- 第 2 层：分解为子系统，比如可以把整个程序拆分为：输入系统、显示系统、业务系统
+- 第 3 层：分解为类，在 C 语言里没有类，可以分解为结构体
+- 第 4 层：分解为子程序，就是实现那些结构体(实现里面的函数指针)
+
+### 2.2.1 分解为子系统
+
+一个系统，必定可以分为这 3 大子系统：输入系统、处理系统、输出系统。
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-2/image01.jpg" alt="image01" style="zoom:50%;" />
+
+这种拆分方法过于粗糙，在复杂场景里需要进一步拆分。比如对于输入子系统，如果产品有用户输入、传感器、远程控制等功能，那么输入子系统可以拆分为：用户输入子系统、传感器子系统、远程控制子系统，如下：
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-2/image02.jpg" alt="image02" style="zoom:50%;" />
+
+比如对于输出子系统，可能会涉及显示、操作各类设备、数据保存，那么就可以细分为：显示子系统、设备操作、数据子系统，如下：
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-2/image03.jpg" alt="image03" style="zoom:50%;" />
+
+对于中间的处理子系统，它根据输入，提供输出。不同的产品有不同的处理逻辑，对于智能家居产品，它根据用户按键、或者根据预设时间、或者根据远程控制命令，去操作各类家居产品；对于工业机器人，它根据各类信号，执行特定的动作。处理子系统是一个集成者：根据业务逻辑，采集左侧各类输入子系统的数据，操作右侧各类输出子系统。以智能家居产品为例，处理子系统又可以细分为：用户关系处理子系统、设备控制子系统、配置子系统等
+
+等，如下：
+
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-2/image04.png" alt="image-20230815214356726" style="zoom:50%;" />
+
+### 2.2.2 分解为结构体
+
+怎么实现某个子系统？关键在于抽象出合适的结构体。比如对于用户输入子系统，可以对外提供两个接口函数：初始化、获得按键数据。关键就在于怎么表示“按键数据”。对于用户输入，来源有多种：按键、鼠标、触摸屏。使用怎样的结构体，能统一地描述这些不同来源的输入事件？可以参考 Linux 中的代码，在 Linux 中有如下结构体：
+
+```c
+struct input_event{
+    struct timeval time;
+    __u16 type;
+    __u16 code;
+    __s32 value;
+};
+```
+
+- 第 2 行的 time，表示事件发生的时间。
+- 第 3 行 type 表示事件类型，有下面这些取值，EV_KEY 表示按键，EV_REL 表示相对位移比如鼠标，EV_ABS 表示绝对位移比如触摸屏。
+
+```c
+#define EV_KEY 0x01
+#define EV_REL 0x02
+#define EV_ABS 0x03
+```
+
+- 第 4 行 code 表示编码，比如按键有 A、B、C 等按键的编码值，鼠标有 X、Y 等方向的编码值，触摸屏有 X、Y、Z 等方向的编码值。
+- 第 5 行 value 表示取值，比如对于按键：0 表示松开，1 表示按下；对于鼠标，它就表示偏移值；对于触摸屏，它就表示触点坐标。
+
+举几个例子，比如按下键盘上的 A 键时，怎么使用 input_event 结构体表示它？如下：
+
+```c
+{time, EV_KEY, KEY_A, 1}
+```
+
+往右边移动鼠标 100 个单位，往下移动鼠标 200 个单位，怎么使用 input_event 结构体表示它？需要用 2 个 input_event 结构体，如下：
+
+```c
+{time, EV_REL, REL_X, 100}
+
+{time, EV_REL, REL_Y, 200}
+```
+
+在触摸屏(100, 200)的位置点击、松开，怎么使用 input_event 结构体表示它？需要用3 个 input_event 结构体，如下：
+
+```c 
+{time, EV_ABS, ABS_X, 100}
+
+{time, EV_ABS, ABS_Y, 200}
+
+{time, EV_ABS, ABS_Z, 1} // 表示按下
+```
+
+考虑完善的结构体，有助于涉及实现子系统，有了 input_event 结构体后，用户输入子系统对外提供的接口就可以如下定义：
+
+```c
+int Init_User_Input_System(void);
+
+int Get_Input_Event(struct input_event *ptEvent);
+```
+
+假设需要同时支持多种用户输入设备，那么还可以继续抽象出其他结构体，比如用来描述输入设备的“struct input_dev”，如下：
+
+```c
+struct input_dev {
+	const char *name;
+	int (*Init)(void);
+  };
+```
+
+对于每一个输入设备，都会为它构建一个“struct input_dev”结构体。
+
+### 2.2.3 分解为子程序
+
+还是以用户输入系统为例，假设需要支持按键、鼠标、触摸屏，那么可以构造对应的 3个“struct input_dev”结构体，给里面的 Init 函数指针提供按键、鼠标、触摸屏的初始化函数，最重要的是：分别注册中断处理函数。
+
+1) 在按键中断处理函数里，消除抖动、构造“struct input_event”结构体，并把它写入一个环形缓冲区。
+2) 在鼠标中断处理函数里，解读鼠标数据、构造“struct input_event”结构体，并把它写入一个环形缓冲区。
+3) 在触摸屏中断处理函数里，通过 I2C 等接口读取触点数据、构造“struct input_event”结构体，并把它写入一个环形缓冲区。
+
+程序框图如下：
+
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-2/image05.jpg" alt="image04" style="zoom:50%;" />
+
+
+如果使用多任务系统，那么可以把上图的环形缓冲区替换为消息队列，各类中断程序写消息队列时可以唤醒等待输入事件的任务。
+
+
+### 2.2.4 结构体的继承
+
+在单片机软件开发中，基本使用的是 C 语言，很少使用 C++。C 语言是面向过程的语言，但是我们可以使用结构体实现面向对象的开发。但是结构体跟类，有很大的差别。
+
+在 C++中实现类时，可以有继承关系。在 C 语言中使用结构体时，也可以使用继承（在RT-Thread 中大量使用到结构体的继承）。比如人类、狗都属于生物，生物都有性别、体重等属性，那么可以如下定义生物、人类、狗三个结构体，人类和狗都继承了生物的特性：
+
+```c
+struct organism
+{
+    int sex;    // 性别
+    int weight; // 体重
+};
+
+struct person
+{
+    struct organism parent; // 父类
+    const char *school;     // 毕业学校
+};
+
+struct dog
+{
+    struct organism parent; // 父类
+    const char *species;    // 种类
+};
+
+```
+
+使用结构体的继承时，“父结构体”必须是“子结构体”的第一个成员。这样有一些好处，比如要实现一个打印体重的函数，可以只实现一个版本，示例代码如下：
+
+```c
+void PrintWeight(struct organism *p)
+{
+    printf("weight : %d\n", p->weight);
+}
+
+void main(void)
+{
+    struct person per = {{1, 100}, "USTC"};
+    struct person dog = {{1, 10}, "Husky"};
+
+    PrintWeight(&per);
+    PrintWeight(&dog);
+}
+```
+
+- 第 1 行实现了一个“打印生物体重”的函数。
+- 第 8、9 行分别定义了一个“人”、“狗”的结构体。
+- 第 11、12 行，可以使用同一个函数“PrintWeight”来打印人的体重、打印狗的体重。如果不使用结构体的继承，那么就需要分别实现人、狗的打印函数，示例代码如下：
+
+```c
+struct person{
+    int sex;            // 性别
+    int weight;         // 体重
+    const char *school; // 毕业学校
+};
+
+struct dog{
+    int sex;             // 性别
+    int weight;          // 体重
+    const char *species; // 种类
+};
+
+void PrintPersonWeight(struct person *p)
+{
+    printf("weight : %d\n", p->weight);
+}
+
+void PrintDogWeight(struct person *p)
+{
+    printf("weight : %d\n", p->weight);
+}
+void main(void)
+{
+    struct person per = {{1, 100}, "USTC"};
+    struct person dog = {{1, 10}, "Husky"};
+
+    PrintPersonWeight(&per);
+    PrintDogWeight(&dog);
+}
+```
+
+### 2.2.5 结构体的函数指针
+
+结构体的成员里，可以使用变量来描述属性，使用函数指针来描述方法，比如 LED 可以抽象出如下结构体：
+
+```c
+struct led {
+	void (*on)(void);
+	void (*off)(void);
+};
+```
+
+对于使用芯片引脚控制的 LED，即使引脚不同，操作函数也是类似的。那怎么分辨使用哪个引脚呢？需要在“struct led”里添加属性以描述引脚，如下：
+
+```c
+struct led {
+	int pin; // 引脚
+ 	void (*on)(void);
+ 	void (*off)(void);
+};
+```
+
+但是，在 on、off 指针对应的函数里，怎么引用到属性 pin？C 语言的结构体里不能想C++的类那样使用 this 指针来引用自己，所以结构体还需要改进，在 on、off 函数指针里增加一个参数：增加结构体本身的指针，如下：
+
+```c
+struct led{
+    int pin; // 引脚
+    void (*on)(struct led *p);
+    void (*off)(struct led *p);
+};
+```
+
+使用“struct led”的示例代码如下：
+
+```c
+// 点灯
+struct led{
+    int pin; // 引脚
+    void (*on)(struct led *p);
+    void (*off)(struct led *p);
+};
+
+    static ra_led_on(struct led *p)
+{
+    // 点亮 LED
+    // 操作引脚 p->pin
+}
+
+static ra_led_off(struct led *p)
+{
+    // 熄灭 LED
+    // 操作引脚 p->pin
+}
+
+static struct led g_led = {
+    .pin = 100,
+    .on = ra_led_on,
+    .off = ra_led_off,
+};
+
+void main()
+{
+    while (1)
+    {
+        g_led.on(&g_led);
+        delay_ms(500);
+        g_led.off(&g_led);
+        delay_ms(500);
+    }
+}
+```
+
+- 第 8、11 行实现的函数，需要从参数“struct led *p”获得要操作哪个引脚：p->pin。
+- 第 21~25 行实现的结构体，需要指定属性 pin：使用哪个引脚。
+- 第 31、33 行，调用 g_led.on、g_led.off 函数指针时，需要传输 g_led 的地址。
+
+### 2.2.6 程序设计原则
+
+怎样把整个系统拆分多个子系统？在实现子系统时怎样抽象出各个结构体？原则是：高内聚，低耦合。
+
+- 高内聚：一个子系统（或者一个结构体），尽可能只完成一个功能，即最大限度地耦合。
+- 低耦合：一个子系统（或者一个结构体）的实现，尽可能少地调用到另一个子系统（或另一个结构体）的功能。
+
+简单地说，就是尽可能让一个子系统（或一个结构体）的功能比较单一，减少对其他子系统（或其他结构体）的依赖。增强内聚度、降低耦合度的方法：
+
+- 基于接口编程，隐藏内部实现的细节
+- 模块只对外暴露最小限度的接口，形成最低的依赖关系
+- 只要对外接口不变，模块内部的修改不得影响其他模块
+- 删除一个模块，应当只影响有依赖关系的其他模块，而不应该影响其他无关部分
+- 模块的功能尽可能的单一
+- 接口函数在头文件中声明，内部函数不要放在头文件里声明
+- 接口函数在 C 文件中实现，内部函数定义为 static 函数，内部变量定义为 static
+- 尽量少用全局变量，要使用全局变量的话不要直接访问，使用函数来访问
+- 调用者只需要包含头文件
+- 函数代码不要太长，功能太复杂的话拆分为多个子函数
+
+
+
