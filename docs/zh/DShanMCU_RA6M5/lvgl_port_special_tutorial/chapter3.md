@@ -195,24 +195,6 @@ static volatile bool g_i2c2_rx_complete = false;
 /***********************************************************************************************************************
  * Functions
  **********************************************************************************************************************/
-fsp_err_t drv_i2c_touchpad_test(void)
-{
-    fsp_err_t err;
-    uint16_t x = 0, y = 0;
-
-    err = touchpad_is_touched ();
-
-    if (FSP_SUCCESS == err)
-    {
-        //循环读取每个触控点的位置值
-        for (int i = 0; i < TOUCH_POINT_TOTAL; ++i)
-        {
-            touchpad_get_pos (&x, &y, i);
-            printf ("No: %d, touched x: %d, touched y: %d\r\n", i, x, y);
-        }
-    }
-    return err;
-}
 
 fsp_err_t drv_i2c_touchpad_init(void)
 {
@@ -502,8 +484,6 @@ typedef enum
  **********************************************************************************************************************/
 
 fsp_err_t drv_i2c_touchpad_init(void);
-
-fsp_err_t drv_i2c_touchpad_test(void);
 
 void touchpad_set_rotation(tp_rotation_t rotation);
 
