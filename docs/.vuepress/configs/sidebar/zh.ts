@@ -12,6 +12,7 @@ export const sidebarZh: SidebarConfig = {
         '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter3.md',
         '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter4.md',
         '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter5.md',
+        '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter6.md',
       ],
     },
   ],
