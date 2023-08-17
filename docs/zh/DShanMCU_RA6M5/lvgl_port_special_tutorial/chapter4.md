@@ -240,6 +240,18 @@ static void spi_display_init(void)
     spi_display_reset();
     spi_display_backlight_opt(BSP_IO_LEVEL_HIGH); // backlight on
 
+#if 1
+    spi_send_data_cmd((uint8_t []){0x11}, SPI_SEND_CMD, 1);     // Sleep out
+    spi_send_data_cmd((uint8_t []){0x20}, SPI_SEND_CMD, 1);     // 关闭显示反转
+    spi_send_data_cmd((uint8_t []){0x36}, SPI_SEND_CMD, 1);     // 内存数据访问控制设置
+    spi_send_data_cmd((uint8_t []){0x48}, SPI_SEND_DATA, 1);    // 显示方向：左->右，上->下(不旋转); BGR
+
+    spi_send_data_cmd((uint8_t []){0x3a}, SPI_SEND_CMD, 1);     // 设置像素格式(bpp)
+    spi_send_data_cmd((uint8_t []){0x55}, SPI_SEND_DATA, 1);    // RGB接口颜色格式：16bit/pixel；控制接口的颜色格式：16bit/pixel
+
+    spi_send_data_cmd((uint8_t []){0x13}, SPI_SEND_CMD, 1);     // 普通显示模式
+    spi_send_data_cmd((uint8_t []){0x29}, SPI_SEND_CMD, 1);     // 开启显示
+#elif
     spi_send_data_cmd((uint8_t []){0x11}, SPI_SEND_CMD, 1);
     spi_send_data_cmd((uint8_t []){0x00}, SPI_SEND_DATA, 1);
     R_BSP_SoftwareDelay(120, BSP_DELAY_UNITS_MILLISECONDS);     //延时120ms
@@ -284,6 +296,7 @@ static void spi_display_init(void)
     /*rotation*/
     spi_send_data_cmd((uint8_t []){0x36}, SPI_SEND_CMD, 1);
     spi_send_data_cmd((uint8_t []){0x48}, SPI_SEND_DATA, 1);    // 0
+#endif
 
 }
 
@@ -375,46 +388,6 @@ fsp_err_t drv_spi_display_flush_data(uint8_t * data, uint32_t len);
 
 #endif /*DRV_SPI_DISPLAY_H*/
 
-```
-
-将 `src\hal_entry.c` 文件中的 **hal_entry()** 函数代码改为如下：
-
-```c
-void hal_entry(void)
-{
-    /* TODO: add your own code here */
-    fsp_err_t err;
-
-    err = drv_uart_init();
-    if(FSP_SUCCESS != err) __BKPT();
-
-    err = drv_spi_display_init();
-    if(FSP_SUCCESS != err)
-    {
-        printf ("%s %d\r\n", __FUNCTION__, __LINE__);
-        __BKPT();
-    }
-
-    while (1)
-    {
-        drv_spi_display_test((uint16_t)LCD_COLOR_RED);
-        printf ("Full screen display in red\r\n");
-        R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); //延时500ms
-
-        drv_spi_display_test((uint16_t)LCD_COLOR_GREEN);
-        printf ("Full screen display in green\r\n");
-        R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); //延时500ms
-
-        drv_spi_display_test((uint16_t)LCD_COLOR_BLUE);
-        printf ("Full screen display in blue\r\n");
-        R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); //延时500ms
-    }
-
-#if BSP_TZ_SECURE_BUILD
-    /* Enter non-secure code */
-    R_BSP_NonSecureEnter();
-#endif
-}
 ```
 
 ## 4.4 编写app
