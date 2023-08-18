@@ -543,6 +543,9 @@ void hal_entry(void)
 
 点击编译按钮，再点击 debug 按钮，将程序烧写到开发板中。会看到屏幕依次循环刷红、绿、蓝三种颜色。
 
+## 【拓展】为什么要交换RGB565颜色数据两个字节的顺序
+
+![chapter-4_015](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-4/chapter-4_015.png)
 
 <center>本节完</center>
 
