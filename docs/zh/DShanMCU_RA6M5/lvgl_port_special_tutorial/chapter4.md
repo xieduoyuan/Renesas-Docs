@@ -23,9 +23,11 @@
 
 <img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-4/chapter-4_002.png" alt="chapter-4_003" style="zoom:80%;" />
 
-可以看到原理图并没有像之前那样直接就能确定使用的是哪一路spi，因此需要打开位于 `03硬件资料\5_官方资料\RA6M5 Group User's Manual Hardware.pdf` 的文档，跳转到下图所示的位置，确定使用的是 spi1：
+可以看到原理图并没有像之前那样直接就能确定使用的是哪一路spi，因此需要打开位于 `03硬件资料\5_官方资料\RA6M5 Group User's Manual Hardware.pdf` 的文档，跳转到下图所示的两个位置，确定使用的是 spi1：
 
 <img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-4/chapter-4_003.png" alt="chapter-4_003" style="zoom: 67%;" />
+
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter-4/chapter-4_003-0.png" alt="chapter-4_003-0" style="zoom: 67%;" />
 
 
 `03硬件资料\5_官方资料\RA6M5 Group User's Manual Hardware.pdf` 的文档，跳转到下图所示的位置，确定SPI时钟频率计算公式：
@@ -47,6 +49,7 @@
 接下来我们根据这些信息对 `r_spi` 进行配置。
 
 ### 4.2.2 添加 Stacks(r_spi_master)
+
 1. 打开 `FSP Configuration` 视图：双击项目文件夹中的  `configuration.xml` 文件。
 2. 按照下图所示，添加  `r_spi` 模块：
 
