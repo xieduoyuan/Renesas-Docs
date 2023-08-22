@@ -36,7 +36,7 @@ d) 校验值寄存器：SYST_CALIB
 
 控制状态寄存器各个位的描述如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image1.png) 
 
 - Bit0-ENABLE：计数器使能位；0-不使能计数器；1-使能计数器；
 - Bit1-TICKINT：滴答定时器中断请求位；0-计数到0不产生中断请求；1-产生中断请求；
@@ -49,17 +49,17 @@ CSR寄存器上电复位默认值是0x00000000，一般情况下，程序是需�
 
 重载值寄存器虽然是一个32bit的寄存器，但是鉴于滴答定时器的设计只有24位的计数值，因而此寄存器只有低24bit有效，高8bit保留，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image2.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image2.png) 
 
 所谓重载值，就是指滴答定时器计数到0时，又重新从这个值开始向下计数。例如程序中需要滴答定时器从100开始向下计数，那么这里就将RVR的低24bit设置为‘100-1’，也就是十六进制的0x63,二进制的0110 0011，那么RVR寄存器的值就是下图这样：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image3.png)  
 
 ### 11.2.3 当前计数值寄存器SYST_CVR
 
 当前计数值寄存器CVR也是低24bit有效，用来表示滴答定时器当前的计数值，如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image4.png)  
 
 无论程序给此寄存器写入什么值，都会将此寄存器清零，并且会将计数标志位COUNTFLAG清零。
 
@@ -67,7 +67,7 @@ CSR寄存器上电复位默认值是0x00000000，一般情况下，程序是需�
 
 滴答定时器还有一个校准寄存器CALIB，它是只读寄存器，无需操作。从Cortex-M33的调试手册中其对滴答定时器的各个寄存器总结如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image5.png)  
 
 那么开发者配置滴答定时器时，步骤如下：
 
@@ -214,6 +214,6 @@ void hal_entry(void)
 
 将程序编译出来的二进制可执行文件烧录到处理器中运行可以得到如下图的结果：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image6.png)  
 
 开发板上LED间隔1s改变状态。
