@@ -170,7 +170,7 @@ CAN FD模块的通用参数类型如下图所示：
 
 其中Global Error Interupt、Reception和Flexible Data还会细分设置具体的参数，这些参数的作用见下表：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-17/images14.jpg" alt="images14" style="zoom:80%;" />
+![images12](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-17/images14.jpg)
 
 ![images15](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-17/images15.jpg)
 
