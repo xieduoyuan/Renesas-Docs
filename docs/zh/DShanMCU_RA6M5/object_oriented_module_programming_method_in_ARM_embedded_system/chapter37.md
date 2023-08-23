@@ -4,19 +4,19 @@
 
 本次实验使用的SPI-DAC模块是定制模块，原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image1.png) 
 
 核心芯片是TLC5615，主机通过SPI接口发出一个数字量，TCL5615将数字量转化为模拟量，并通过OUT引脚输出模拟电压来点亮LED。通过LED的亮度形象地感受DAC的效果。这个模块的参考电压是2.048V，可以输出的最大电压是2倍参考电压，即4.096V。
 
 TLC5615是一个10bit的DAC转换芯片，用户需要将需要转换的数字量左移2bit后再通过SPI发送给TLC5165，数据格式和转换关系如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image2.png)  
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image3.png)  
 
 由于TLC5615是10位DAC,它允许主控每次发送12位或者16位的数据，12位和16位的发送数据格式要求如下图所示。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image4.png)  
 
 这个模块的使用比较简单，重点是在SPI的通信上，其次是在发送数据的时候需要移位。
 
@@ -24,15 +24,15 @@ TLC5615是一个10bit的DAC转换芯片，用户需要将需要转换的数字�
 
 本次实验使用的是开发板配套扩展板的SPI组，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image5.PNG)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image5.PNG)  
 
 使用的SPI引脚是P202/P203/P204和P205，SPI引脚对应使用的是RA6M5的Common SPI0:
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image6.PNG)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image6.PNG)  
 
 本次实验使用的SPI-DAC模块控制比较简单，对于SPI的Stack配置使用默认参数即可，使能发送buffer空中断，配置中断对调函数，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image7.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-37\image7.png) 
 
 ## 37.3 外设驱动
 
