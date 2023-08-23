@@ -12,7 +12,7 @@ DHT11数字温湿度传感器是一款含有已校准数字信号输出的温湿
 
 主机通过一条数据线与DH11连接，主机通过这条线发命令给DHT11，DHT11再通过这条线把数据发送给主机。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image1.png) 
 
 ### 33.1.3 通信时序
 
@@ -20,14 +20,14 @@ DHT11数字温湿度传感器是一款含有已校准数字信号输出的温湿
 
 通讯过程如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image2.png)  
 
 1) 总线空闲状态为高电平；
 2) 主机把总线拉低等待DHT11响应,主机把总线拉低必须大于18毫秒,保证DHT11能检测到起始信号；
 3) DHT11接收到主机的开始信号后,等待主机开始信号结束,然后发送80us低电平响应信号；
 4) 主机发送开始信号结束后,延时等待20-40us后,读取DHT11的响应信号；
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image3.png)  
 
 主机发送开始信号后,可以切换到输入模式,或者输出高电平均可,总线由上拉电阻拉高。
 
@@ -40,13 +40,11 @@ DHT11数字温湿度传感器是一款含有已校准数字信号输出的温湿
 
 1. 数据‘0’
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image4.png)  
 
 2. 数据‘1’
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image5.png)  
-
- 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image5.png)  
 
 ## 33.2 模块配置
 
@@ -54,11 +52,11 @@ DHT11数字温湿度传感器是一款含有已校准数字信号输出的温湿
 
 ### 33.2.1 GPIO配置
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image6.png)  
 
 ### 33.2.2 GPT配置
 
- ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image7.png)
+ ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image7.png)
 ## 33.3 驱动程序
 
 ### 33.3.1 IO驱动
@@ -201,4 +199,4 @@ void DeviceTest(void)
 
 将程序烧录到开发板运行，可以观察到如下结果：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-32\image8.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-33\image8.png)
