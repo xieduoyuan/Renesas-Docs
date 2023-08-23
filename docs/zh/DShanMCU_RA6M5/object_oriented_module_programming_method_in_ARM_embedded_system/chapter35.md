@@ -684,4 +684,4 @@ void DeviceTest(void)
 
 将程序烧写到开发板上运行，打开串口助手并且插上扩展板以及接上ADXL345模块，可以观察到下图所示的结果：
 
- ![]http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image7.png) 
+ ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image7.png) 
