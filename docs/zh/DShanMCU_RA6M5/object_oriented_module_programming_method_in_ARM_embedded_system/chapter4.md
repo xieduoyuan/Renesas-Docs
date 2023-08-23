@@ -279,10 +279,10 @@ R_SPIIOPORT_PinWrite(&g_ioport_ctrl, Leds.p_leds[BSP_LED_LED1], BSP_IO_LEVEL_LOW
 
 一般来说，内部函数遵循“NounNounVerb”（名词名词动词）的命名约定，例如CommunicationAbort()。函数的返回值表示是否成功，函数要对外输出结果时，这些结果只在输出参数中返回，并且第一个参数始终是指向其控制结构体的指针。下面是 FSP 中常用前缀：
 
-1. **R_BSP_xxx：**BSP 函数的前缀，例如 R_BSP_VersionGet()。
-2. **BSP_xxx：**BSP 宏的前缀，例如 BSP_IO_LEVEL_LOW。
-3. **FSP_xxx：**常用的 FSP的前缀，主要定义错误代码（例如 FSP_ERR_INVALID_ARGUMENT）和版本信息（例如 FSP_VERSION_BUILD）。
-4. **g_&lt;interface&gt;_on_&lt;instance&gt;：**实例的常量全局结构体的名称，用这个结构体管理 API 的各个实现函数，比如 g_ioport_on_ioport 结构体里是 r_ioport.c 实现的各个 API 函数。
-5. **r_&lt;interface&gt;_api.h：**接口模块头文件的名称，例如 r_spi_api.h。
-6. **R_&lt;MODULE&gt;_&lt;Function&gt;：**FSP 驱动程序 API 的名称，例如 R_SPI_WriteRead()。
-7. **RM_&lt;MODULE&gt;_&lt;Function&gt;：**中间件函数的名称，例如 RM_BLE_ABS_Open()。
+1. **R_BSP_xxx：** BSP 函数的前缀，例如 R_BSP_VersionGet()。
+2. **BSP_xxx：** BSP 宏的前缀，例如 BSP_IO_LEVEL_LOW。
+3. **FSP_xxx：** 常用的 FSP的前缀，主要定义错误代码（例如 FSP_ERR_INVALID_ARGUMENT）和版本信息（例如 FSP_VERSION_BUILD）。
+4. **g_&lt;interface&gt;_on_&lt;instance&gt;：** 实例的常量全局结构体的名称，用这个结构体管理 API 的各个实现函数，比如 g_ioport_on_ioport 结构体里是 r_ioport.c 实现的各个 API 函数。
+5. **r_&lt;interface&gt;_api.h：** 接口模块头文件的名称，例如 r_spi_api.h。
+6. **R_&lt;MODULE&gt;_&lt;Function&gt;：** FSP 驱动程序 API 的名称，例如 R_SPI_WriteRead()。
+7. **RM_&lt;MODULE&gt;_&lt;Function&gt;：** 中间件函数的名称，例如 RM_BLE_ABS_Open()。
