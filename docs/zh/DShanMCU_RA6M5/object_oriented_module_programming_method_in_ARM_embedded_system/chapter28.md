@@ -6,7 +6,7 @@
 
 随着功能的增加，一个工程涉及的文件会越来越多，本书设计了如下图所示的工程结构：
 
-http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-28
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-28/image1.jpg)
 
 1. 应用程序
 
