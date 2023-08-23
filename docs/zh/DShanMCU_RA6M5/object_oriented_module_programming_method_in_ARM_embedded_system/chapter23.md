@@ -651,7 +651,7 @@ void ADCAppTest(void)
 
 对应ARM的Cortex-M内核，它对于数据的处理一套DSP库，集成到了ARM的CMSIS架构中，这些库包含以下处理算法：
 
-- )BasicMathFunctions：基本数学函数：提供浮点数的各种基本运算函数，如向量加减乘除等运算。
+- BasicMathFunctions：基本数学函数：提供浮点数的各种基本运算函数，如向量加减乘除等运算。
 - CommonTables：数字信号处理常用参数表。
 - ComplexMathFunctions：复数计算数学函数。
 - ControllerFunctions：控制算法函数。包括正弦余弦，PID电机控制，矢量Clarke变换，矢量Clarke逆变换等。
