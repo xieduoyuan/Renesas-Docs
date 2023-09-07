@@ -1,4 +1,8 @@
-# 前言
+# 《ARM嵌入式系统中面向对象的模块编程方法》基于DShanMCU-RA6M6(瑞萨MCU)
+
+- [DShanMCU-RA6M6(瑞萨MCU)开发套件](https://item.taobao.com/item.htm?id=728461040949)
+
+## 前言
 
 自2005年以来，我一直从事Linux开发，但对于单片机始终没有产生兴趣，原因是觉得单片机太过简单了，Flash和RAM只有几十KB，感觉就像是在螺蛳壳里面打坐，能展现出什么新花样呢？直到最近两年，我经历了一次震撼。
 
@@ -38,7 +42,7 @@
 ![](https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/directory.jpg)
 
 
-# 获取《ARM嵌入式系统中面向对象的模块编程方法》离线版本
+## 获取《ARM嵌入式系统中面向对象的模块编程方法》离线版本
 
 目前 《ARM嵌入式系统中面向对象的模块编程方法》 在线阅读版本持续更新中，下面是下载PDF版本的链接：
 
