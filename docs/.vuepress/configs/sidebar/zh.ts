@@ -53,6 +53,7 @@ export const sidebarZh: SidebarConfig = {
       text: '在e2studio中使用DAP进行开发调试',
       collapsible: true,
       children: [
+        '/zh/DShanMCU_RA6M5/e2studio_use_dap/README.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter1.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter2.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter3.md',

@@ -8,11 +8,11 @@ export const navbarZh: NavbarConfig = [
   },
   {
     text: 'e2studio+DAP开发',
-    link: '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter1.md',
+    link: '/zh/DShanMCU_RA6M5/e2studio_use_dap/',
   },
   {
     text: 'LVGL移植专题',
-    link: '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/README.md',
+    link: '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/',
   },
   {
     text: `瑞萨系列`,
