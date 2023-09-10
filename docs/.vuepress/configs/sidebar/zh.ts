@@ -31,6 +31,10 @@ export const sidebarZh: SidebarConfig = {
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter21.md',
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter22.md',
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter23.md',
+          '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter24.md',
+          '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter25.md',
+          '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter26.md',
+          '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter27.md',
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter28.md',
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter29.md',
           '/zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter30.md',
@@ -49,6 +53,7 @@ export const sidebarZh: SidebarConfig = {
       text: '在e2studio中使用DAP进行开发调试',
       collapsible: true,
       children: [
+        '/zh/DShanMCU_RA6M5/e2studio_use_dap/README.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter1.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter2.md',
         '/zh/DShanMCU_RA6M5/e2studio_use_dap/chapter3.md',

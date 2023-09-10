@@ -324,7 +324,7 @@ SCIn通道使用TXDn、RXDn引脚，所以可以根据TXDn或RXDn的编号确定
 
 以I2C、SPI为例，可以使用SCI模块实现这些功能，也可以使用单独的I2C模块、SPI模块实现这些功能。SCI模块和I2C、SPI模块是并列的关系，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-6/image23.PNG)
+![](https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-6/image23.png)
 
 当引脚连接到SCI模块时，SCI可以工作于“Simple I2C”、“Simple SPI”模式。如果想使用更完善的I2C、SPI功能，需要配置这些引脚连接到专门的I2C模块、SPI模块。
 

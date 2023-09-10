@@ -8,7 +8,7 @@ ICU模块将异常向量中断控制器（NVIC）、DMA控制器（DMAC）和数
 
 ICU模块的框图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image1.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10/image1.png)
 
 将此框图分为3大模块：
 
@@ -18,6 +18,6 @@ ICU模块的框图如下图所示：
 
 ICU模块可以控制可屏蔽中断和不可屏蔽中断的具体细节如下表：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10\image2.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-10/image2.png)
 
 在FSP中，表格里面的中断都可以配置且可以和用户自定义的中断函数相关联，本书不对本章进行独立配置讲解，将会从后文的实际外设驱动开发中来说明。
