@@ -692,7 +692,7 @@ static void OLEDDrvSetDispWindow(struct DisplayDevice* ptDev,
 
 绘制单个像素首先需要知道绘制的地址是哪一个，假设将column地址设置为x，page地址设置为y，那么目标像素地址的换算公式如下：
 
-![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps213.jpg) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image13.png)
 
 y除以8是因为共有8页，再乘以128是因为每一页有128个column。
 
