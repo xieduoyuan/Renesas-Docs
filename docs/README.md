@@ -5,6 +5,11 @@
   此网站支持 
   * [DShanMCU-RA6M5开发板](https://item.taobao.com/item.htm?id=728461040949)
 
+# 配套学习资料获取
+
+- DShanMCU-RA6M5开发板：[http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html](http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html)
+- 更多开发板敬请期待...
+
 
 所有页面都存放于GitHub仓库，大家如果发现错误 可以点击页面左上角的  编辑此页 提示文字自行编辑提交。
 
