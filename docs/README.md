@@ -10,6 +10,12 @@
 - DShanMCU-RA6M5开发板：[http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html](http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html)
 - 更多开发板敬请期待...
 
+# 本站学习资源汇总
+
+1. [瑞萨MCU零基础入门文档教程](./zh/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system)
+2. [瑞萨GUI(LVGL)移植实战教程](./zh/DShanMCU_RA6M5/lvgl_port_special_tutorial)
+3. [在e2studio中使用DAP进行开发调试](./zh/DShanMCU_RA6M5/e2studio_use_dap)
+
 
 所有页面都存放于GitHub仓库，大家如果发现错误 可以点击页面左上角的  编辑此页 提示文字自行编辑提交。
 
