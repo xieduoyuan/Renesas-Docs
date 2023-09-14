@@ -13,17 +13,17 @@
 
 板载的I2C模块是一片EEPROM，原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image1.png) style="zoom: 150%;" /> 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image1.png) style="zoom: 150%;" /> 
 
 在RASC中创建了工程后，在“Pins”里面的“Peripherals”中展开“Connectivity:SCI”，选择其中一个SCI通道，例如SCI4，在“Pin Configuration”配置界面里的“Operation Mode”中将操作模式选为“Simple I2C”，如图所示：
 
- ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image2.png)
+ ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image2.png)
 
 上图中的第⑥步需要根据原理图来选择引脚，本书使用过的是P206和P207。
 
 接着在“Stacks”中添加SCI I2C的堆栈模块，点击进入“Stacks”配置界面后，点击“New Stack”，展开里面的“Connectivity”，选择“I2C Master(r_sci_i2c)”，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image3.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image3.png) 
 
 这里要注意，RA的I2C分为“Simple I2C”和“Common I2C”,“Simple I2C”是SCI的模式之一，而“Common I2C”是一个实际存在的I2C硬件控制器。本章的实验是基于SCI的I2C主机，因而选择的是“I2C Master(r_sci_i2c)”。
 
@@ -31,7 +31,7 @@
 
 完成这些操作后，会在“Stacks”配置界面的“HAL/Common Stacks”中新增一个“g_i2c0 I2C Master(r_sci_i2c)”模块，接下来就要根据实际应用配置这个模块。比如在前面选择的是SCI的I2C4，而此处新增的模块默认名称是“g_i2c0”且默认的通道是0，为了和实际通道匹配，就要去这个模块的属性中更改名称及其通道，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image4.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image4.png" style="zoom:150%;" /> 
 
 2. 设置从机地址
 
@@ -39,16 +39,16 @@
 
 在SCI I2C的“Stacks中，它的“Module”中有两个选项用于设置从机地址，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image5.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image5.png" style="zoom:150%;" /> 
 
 - Slave Address：从机的地址值；
 - Address Mode：地址模式，支持7-bit模式和10-bit模式，如果选择10-bit模式，还需要在Stacks中的是“Common”中将“10-bit slave addressing”从“Disabled”设置为“Enabled”，如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image6.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image6.png) 
 
 本章的实验是读写一块EEPROM芯片AT24C02，根据它的手册和模块的硬件原理图可以知道其地址是0x50，是一个7-bit模式的地址，因而这里就将“Slave Address”设置为0x50，而地址模式“Address Mode”就使用默认的7-bit，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image7.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image7.png" style="zoom:150%;" />  
 
 既然使用的是7-bit地址模式，那就不用去使能前面的10-bit地址模式了。
 
@@ -60,7 +60,7 @@ I2C的通信速率支持标准速率和快速速率。标准速率最大能到10
 
 速率模式和中断回调函数名称的设置如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image8.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image8.png" style="zoom:150%;" />  
 
 将上面的配置设置好之后就可以点击RASC的“Generate Project Content”生成工程了。
 
@@ -503,7 +503,7 @@ static int EEPROMDrvRead(struct I2CDev* ptDev, unsigned char ucAddr, unsigned ch
 
 本实验使用的方法是开发板上的I2C引脚用杜邦线外接一个EEPROM模块，使用的I2C是SCI2里面的I2C，因而请读者参考下图来连接硬件保证实验的成功进行：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image9.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image9.png) 
 
 ### 9.2.2 EEPROM驱动解析
 
@@ -519,7 +519,7 @@ static int EEPROMDrvRead(struct I2CDev* ptDev, unsigned char ucAddr, unsigned ch
 
 AT24C02的设备地址在手册中如下图描述：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image10.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image10.png) 
 
 高四位固定为1010，低四位分别由三个引脚[A2, A1, A0]和读写控制位RW共同决定，本实验使用的EEPROM模块[A2, A1, A0]三个引脚都是接的地，值为0，因而其7-bit模式下的地址是0x50，而不是0xA0。
 
@@ -529,7 +529,7 @@ AT24C02的读写控制位RW，为0时是写操作，为1时是读操作。
 
 AT24C02单字节写的时序如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image11.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image11.png) 
 
 I2C主机这边的整个流程如下：
 
@@ -545,7 +545,7 @@ I2C主机这边的整个流程如下：
 
 AT24C02的页写时序如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image12.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image12.png) 
 
 I2C主机这边的整个流程如下：
 
@@ -575,7 +575,7 @@ I2C主机这边的整个流程如下：
 
 AT24C02读当前页的时序如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image13.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image13.png) 
 
 这个过程比较简单，主机发送一个读操作的设备地址后，从机就将数据发送给主机。但是这个过程中要清楚读取地址的变化。
 
@@ -591,7 +591,7 @@ AT24C02读当前页的时序如下图：
 
 AT24C02读指定任意地址n个字节的时序如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image14.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image14.png) 
 
 流程如下（忽略了发送设备地址的步骤）：
 
@@ -606,7 +606,7 @@ b) 开始读取n个字节；
 
 AT24C02连续读取n个字节数据的时序如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image15.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image15.png) 
 
 可以看到，这个模式下主机在发送带设备地址之后没有发送内存地址，而是直接开始读，直到读完n个字节的数据后才会发送停止信号。
 
@@ -618,7 +618,7 @@ AT24C02连续读取n个字节数据的时序如下图：
 
 上一小节分析了EEPROM的驱动后，对于程序设计可以归纳出如下图的流程图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image16.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image16.png) 
 
 1. 中断回调函数
 
@@ -774,7 +774,7 @@ static int EEPROMDrvWritePage(struct I2CDev* ptDev, unsigned char ucAddr, unsign
 
 基于这些考量，本书设计了如下图的程序流程图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image17.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image17.png) 
 
 根据此流程图得到了下面的代码：
 
@@ -934,4 +934,4 @@ void hal_entry(void)
 
 编译烧写到处理器运行后，可以得到如下的结果：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9\image18.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-9/image18.png" style="zoom:150%;" /> 

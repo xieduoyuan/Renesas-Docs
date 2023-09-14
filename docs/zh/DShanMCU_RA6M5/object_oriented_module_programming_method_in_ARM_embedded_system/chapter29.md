@@ -4,11 +4,11 @@
 
 环形缓冲区是一个先进先出（FIFO）的闭环的存储空间。通俗的理解为，在内存中规划了一块“圆形”的地，将该“圆形”进行N（Ring Buffer的大小）等分，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image1.png )
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image1.png )
 
 但是实际上，处理器的内存不可能是这样一个闭环的存储方式，而是一片连续的，有起始有结束的空间：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image2.png)  
 
 开发者在程序中只能申请一段有头有尾的内存，通过软件设计将这片内存实现为一个环形的缓冲区。
 
@@ -22,23 +22,23 @@
 - 可读内存起始地址prStart
 - 可读内存大小rLength
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image3.png)  
 
 可以发现这几个单位中是存在算术关系的：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image4.PNG)  ①
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image4.PNG)  ①
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image5.PNG) ②
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image5.PNG) ②
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image6.PNG)  ③
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image6.PNG)  ③
 
 将②式换算下，以可写内存大小为结果：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image7.PNG)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image7.PNG)  
 
 将可读的数据称作有效数据valid data，可读的起始内存地址叫有效数据起始地址pValid，可读的数据个数叫有效数据个数pValidLength。而可写的内存，位于有效数据之后，称之为pValidEnd：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image8.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image8.png) 
 
 基于以上信息，就可以将环形缓冲区的信息抽象为结构体RingBufferInfo：
 
@@ -144,7 +144,7 @@ static int RingBufferFree(struct RingBuffer *ptbuf)
 
 如果从pValidEnd开始写入数据不会超过缓冲区的结束地址，那么直接从pValidEnd处开始写入数据即可：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image9.png)  
 
 如果从pValidEnd开始写入数据会超过缓冲区的结束地址，那么就需要考虑很多：
 
@@ -152,13 +152,13 @@ static int RingBufferFree(struct RingBuffer *ptbuf)
 - 还剩多少个数据需要从pHead处开始写
 - 计算从pHead开始到pValid可以写入多少个数据，是否足够写入剩下的数据；不够的话如何处理？
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image10.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image10.png)  
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image11.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image11.png)  
 
 在本书实验例程中，如果出现了剩余空间不足以容纳新数据时，就用新数据覆盖旧数据：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image12.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image12.png)  
 
 在这个过程中，有效数据的起始地址和结束地址，以及有效数据的个数，需要随着数据的写入跟着变化，这些数据的计算结合示意图可谓一目了然，此处就不再列出计算公式了。
 
@@ -225,11 +225,11 @@ static int RingBufferWrite(struct RingBuffer *ptbuf, const unsigned char *src, u
 
 相比于写数据，读数据的操作就简单了许多。读数据时，从pValid处开始读，如果越过了pEnd，需要从pHead继续读取剩下的数据：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image13.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image13.png)  
 
 而如果从pValid处读取的数据个数不会越过pEnd，那么直接读出即可：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29\image14.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-29/image14.png)  
 
 环形缓冲区的读函数代码如下： 
 

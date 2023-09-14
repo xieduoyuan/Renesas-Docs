@@ -17,9 +17,9 @@ https://www.xshell.com/zh/free-for-home-school/
 
 进入网站填写信息后，Xshell官方会将免费下载链接下发到填写的邮箱：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image1.png) 
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image2.png)  
 
 将邮箱中的链接复制粘贴到浏览器即可进行下载，下载安装。
 
@@ -27,15 +27,15 @@ https://www.xshell.com/zh/free-for-home-school/
 
 Xshell安装好之后，双击运行软件，在弹出的会话窗口点击“新建”添加串口连接：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image3.png)  
 
 然后在“连接”项中将协议设置为“Serial”，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image4.png)  
 
 接着去“连接”中的“串口”处选择串口号（下图的COM20只是一个例子，按照下一节的说明使用USB串口连接W800后，端口好可能不一样）和设置通信参数，如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image5.png)  
 
 设置好之后点击右下角的“连接”即可连接指定串口设备了。
 
@@ -43,11 +43,11 @@ Xshell安装好之后，双击运行软件，在弹出的会话窗口点击“�
 
 W800的硬件接口图如下：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image6.png)  
 
 按上图将硬件连接好之后，使用Xshell打开串口，随后再将上图的WIFI_RESET引脚短接GND复位W800，之后W800就会一直往Xshell发送字符’C’，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image7.png)  
 
 进入此状态后，就可以按照下节内容烧写固件了。
 
@@ -55,23 +55,23 @@ W800的硬件接口图如下：
 
 W800进入烧写状态后，在Xshell的显示窗口点击鼠标右键，选择“传输”->“YMODEM(Y)”->“用YMODEM发送(S)”，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image8.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image8.png)  
 
 随后进入资料包中固件所在位置，选择w800.fls开始烧写：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image9.png)  
 
 最后等待传输烧写完毕：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image10.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image10.png)  
 
 烧写完成后W800会继续对外输出’C’表示还在烧写状态，此时将BOOT引脚与GND断开，并且再次手动复位W800，就可以让W800进入正常工作状态，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image11.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image11.png)  
 
 当Xshell打印出“user task”后，就表明W800已经进入工作状态了。此时可以在Xshell窗口直接输入指令“AT+”并车键（Xshell不会显示输入指令），如果返回“+OK”固件烧写成功了，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image12.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image12.png)  
 
 ## 31.2 AT+指令简介
 
@@ -106,7 +106,7 @@ W800支持的AT+指令非常的多，本书仅展现几个常用的指令。
 
 板载W800的原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image13.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image13.png)  
 
 使用到的RA6M5处理器引脚是P505和P506，对应于SCI的UART6的TX/RX引脚。
 
@@ -114,11 +114,11 @@ W800支持的AT+指令非常的多，本书仅展现几个常用的指令。
 
 1. UART6
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image14.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image14.png)  
 
 2. UART7
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image15.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image15.png)  
 
 ## 31.4 驱动程序
 
@@ -459,7 +459,7 @@ int WiFiBtDevDisableDHCP(const char *ip, const char *netmask, const char *gatewa
 - 密钥索引号：1~4用于WEP加密密钥，其它加密方式固定为0；
 - 密钥字符串：以双引号包围，根据不同的安全模式，密钥使用的长度与格式要求定义如下：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image16.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image16.png)  
 
 本实验将连接热点的三个指令封装到一个函数中，调用者只需要传入连接热点的名称和密码即可：
 
@@ -644,7 +644,7 @@ int WiFiBtDevDisconnect(ConnectInfo info)
 
 本实验中，先使用网络调试助手开启了Windows电脑的TCP服务，然后启动板子。板子上的程序先使用W800连接热点，然后后Windows电脑建立TCP连接。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image17.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image17.png)  
 
 测试函数代码如下所示：
 
@@ -683,4 +683,4 @@ void WiFiBtAppTest(void)
 
 打开串口助手观察信息，打开网络助手启动TCP服务。然后将编译出来的二进制文件烧写到板子上运行，就能在串口助手上观察到W800的响应信息，在网络助手上观察到网络连接信息，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31\image18.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-31/image18.png)

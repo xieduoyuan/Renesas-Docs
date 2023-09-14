@@ -12,11 +12,11 @@ NEC协议是众多红外遥控协议的其中一种,除NEC外,还有RC5、RC6等
 
 NEC编码的一帧（通常按一下遥控器按钮所发送的数据）由引导码、地址码及数据码组成，如下图所示，把地址码及数据码取反的作用是验证数据的正确性。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image1.png) 
 
 当一直按住一个按钮的时候，会隔110ms左右发一次连续码，连续码后面不带任何数据。NEC协议的信号定义如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image2.png)  
 
 引导码由一个9ms的低脉冲加上一个4.5ms的高脉冲组成，它用来通知接收方“我要开始传输数据了”。
 
@@ -32,7 +32,7 @@ NEC协议中，信号的最小时间单位是0.56ms，这个时间对人来说�
 
 本次实验使用的是板载IRDA模块，其原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image3.png)  
 
 使用的引脚是P404，属于定时器GPT3的输入输出控制引脚。
 
@@ -42,13 +42,13 @@ NEC协议中，信号的最小时间单位是0.56ms，这个时间对人来说�
 
 1. 配置Pins
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image4.png)  
 
 2. 配置GPT Stack
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image5.png)  
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image6.png)  
 
 ## 30.3 设备对象封装
 
@@ -594,4 +594,4 @@ void IRDAAppTest(void)
 
 在hal_entry()函数中调用测试函数IRDAAppTest，将编译出来的二进制可执行文件烧录到板子上运行，打开串口助手，按下遥控器按键可以看到类似下面的信息：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-30/image7.png)  

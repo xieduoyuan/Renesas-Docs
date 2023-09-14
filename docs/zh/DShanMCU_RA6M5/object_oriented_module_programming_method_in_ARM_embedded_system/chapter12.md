@@ -17,25 +17,25 @@
 
 本章需要配置的是ICU模块，在RASC中创建好工程之后，在配置界面的“Pins”中的“Peripherals”里找到“Input：ICU”，选中其中的“ICU0”，将“Operation Mode”从“Disable”改为“Enable”，然后选择IRQ的通道和使用的引脚，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image1.png) 
 
 在选择通道的时候需要根据硬件设计使用的IO来选择，例如本书使用的按键IO是P000，原理图如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image2.png)  
 
 P000对应的IRQ通道是哪一个呢？这个需要查看芯片的数据手册，在RA6M5的数据手册中，P000引脚使用的IRQ通道是6通道，如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image3.png)  
 
 所以在RASC的配置中选择的ICU0的IRQ06，并选择引脚为P000。
 
 然后去RASC配置界面的“Stacks”里面添加ICU模块。在“New Stack”里面展开“Input”选中其中的“External IRQ(r_icu)”。如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image4.png)  
 
 最后去配置这个模块的通道和中断回调函数，先来看下配置结果：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image5.png)  
 
 主要配置的是图中圈出来的几个参数：
 
@@ -369,7 +369,7 @@ if(FSP_SUCCESS == err)
 
 本章实验使用的是板载按键，其GPIO是P000，原理图如图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image6.PNG" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image6.PNG" style="zoom:150%;" />  
 
 从图中可知，当按键被按下时P000直接接地，呈现低电平；按键松开后P000被R15上拉到VDD，呈现高电平。
 
@@ -377,7 +377,7 @@ if(FSP_SUCCESS == err)
 
 按键按下和松开后，电平的变化并不是立即从高电平跳变到低电平和从低电平跳变到高电平，中间是会有一段的抖动的，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12\image7.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-12/image7.png" style="zoom:150%;" />  
 
 开发者需要避开抖动期，在按键稳定时再获取按键状态。
 
