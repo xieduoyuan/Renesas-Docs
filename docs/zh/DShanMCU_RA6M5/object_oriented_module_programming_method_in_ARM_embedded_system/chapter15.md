@@ -15,22 +15,22 @@ RA芯片的I2C分为Simple I2C和Common I2C。Simple I2C就是本书《第8章 S
 
 要配置I2C模块，先在RASC的“Pin Configuration”里的“Peripherals”找到“Connectivity:IIC”，然后根据硬件设计选择I2C通道。比如本书使用的是P409/P410作为I2C的SDA和SCL，这两个IO属于I2C2的A组引脚，因而选择“IIC2”，然后在展开的引脚配置中的“Pin Group Selection”选择“_A_only”并且使能操作模式，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image1.png) 
 
 接着再去“Stacks”里添加I2C的模块。点击“New Stack”，选择“Connectivity”，再选择里面的“I2C Master(r_iic_master)”。本章目标是作为主机去读取触摸屏的数据，所以选择Master，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image2.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image2.png) 
 
 当添加了I2C的Master模块后，就要去配置它的参数来。本章实验在RASC中配置I2C的参数具体如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image3.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image3.png)
 
 - Name：I2C模块的名称，需要满足C语言字符串标准；
 - Channel：I2C模块的通道；
 - Rate：I2C通信速率，Standard支持的最大速率400kbps，快速模式最大能达到1Mbps；
 - Rise/Fall Time：SCL信号上升沿和下降沿的耗时；
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image4.png)  
 
 - Duty Cycle：SCL时钟线的占空比，范围是4%~96%，默认是50%；
 - Slave Address：从机设备地址，根据从机芯片设置；
@@ -290,7 +290,7 @@ if (FSP_SUCCESS != err)
 
 本章使用的是外接触摸屏，使用FPC排线与主板相连，FPC的I2C原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image5.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image5.png)
 
 使用的引脚是P409和P410。
 
@@ -300,7 +300,7 @@ GT911是一款拥有5点电容触摸点位、拥有26个驱动通道和14个感�
 
 GT911的通信是标准的I2C通信协议，主机在和GT911进行I2C通信的时候需要满足I2C总线的标准协议。GT911的I2C从机设备地址定义如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image6.png)  
 
 它支持两种地址，使用哪个地址取决于GT911发生复位后INT引脚的电平。如果复位时，INT引脚是高电平，则地址是0x14/0x28/0x29；否则就是0x5D,0xBA/0xBB。
 
@@ -308,7 +308,7 @@ GT911的通信是标准的I2C通信协议，主机在和GT911进行I2C通信的�
 
 通过发送指令和读写数据来驱动GT911，不同的指令支持的数据个数不同：一个指令对应一个寄存器的数据，也可能一个指令对应N个寄存器的数据。以读取点位数据指令0x8157为例，用户发送0x8157指令后可以连续读取7个字节的数据（触控点位ID和触控位置信息）：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image7.png)  
 
 ### 15.2.3 GT911驱动程序
 
@@ -528,7 +528,7 @@ static struct TouchDrv gTP;
 
 什么情况下才需要去读取点位信息呢？有触摸事件发生的时候。而用户该如何获知GT911是否有被触摸呢？它用一个寄存器来表示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image8.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image8.png)  
 
 - Bit-7:buffer_status，1-有触摸数据等待主机读取；0-没有数据；
 - Bit-6:large detect,1-表示有大片区域被触摸了；
@@ -700,6 +700,6 @@ void TouchAppTest(void)
 
 当触摸屏幕的时候，串口助手就会打印例如下图这样的点位坐标信息：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-15/image9.png)  
 
  

@@ -12,11 +12,11 @@ ADXL345是一款小而薄的超低功耗3轴加速度计，分辨率高(13位)�
 
 对于SPI，可3线或4线配置，如以下连接图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image1.png) 
 
 本书配套开发板使用的是4线SPI，对应的通信时序如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image2.png)  
 
 从时序图中可知，ADXL345的地址只有6bit[A5:A0]，地址字节的最高位为读写控制位，此位为1表示对某个地址写数据；此位为0表示读取某个地址的数据。
 
@@ -48,7 +48,7 @@ ADXL345提供两个中断输出引脚：INT1和INT2。这两个中断引脚都�
 
 ADXL345的输出响应，相对于XYZ方向的关系如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image3.png)  
 
 ## 35.3 模块配置
 
@@ -56,11 +56,11 @@ ADXL345的输出响应，相对于XYZ方向的关系如下图所示：
 
 本次实验使用的是开发板配套扩展板的SPI组，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image4.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image4.png)
 
 使用的SPI引脚是P202/P203/P204和P205，SPI引脚对应使用的是RA6M5的Common SPI0:
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image5.png)  
 
 对于P205，将它配置为通用输出即可。
 
@@ -68,7 +68,7 @@ ADXL345的输出响应，相对于XYZ方向的关系如下图所示：
 
 本次实验中，对于SPI的Stack配置不能直接使用默认的参数了，因为ADXL345的手册中明确指明了SPI的SCLK线在空闲时需要处于高电平，而且采样数据是在SPI的上升沿采样，在下降沿有效，而RASC中对于SPI的默认参数刚好相反，需要用户做修改：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image6.png)  
 
 另外还需要使能SPI的“发送buffer为空中断”、“接收中断”，并命名中断回调函数。
 
@@ -684,4 +684,4 @@ void DeviceTest(void)
 
 将程序烧写到开发板上运行，打开串口助手并且插上扩展板以及接上ADXL345模块，可以观察到下图所示的结果：
 
- ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35\image7.png) 
+ ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-35/image7.png) 

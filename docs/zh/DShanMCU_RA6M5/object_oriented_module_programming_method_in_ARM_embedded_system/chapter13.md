@@ -27,11 +27,11 @@ RA芯片的SPI分为Simple SPI和Common SPI。Simple SPI就是本书《第8章 S
 
 配置引脚CS和GPIO为普通输出功能，参考前文《5.3 LED实验》配置GPIO。要在RASC中配置Common SPI，首先在RASC的“Pin Configuration”中的“Peripherals”里展开“Connectivity:SPI”，选中里面的SPI0，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image1.png) 
 
 在第5步配置SPI0时，对于“Pin Group Selection”，有4组可以选：Mixed/A/B/C_Only，如图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image2.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image2.png" style="zoom:150%;" /> 
 
 默认是“A_only”，不同的组别支持的引脚是不同的，此处根据硬件选择的引脚决定，本章使用的是默认引脚A组的P202/P203/P204。
 
@@ -39,15 +39,15 @@ RA芯片的SPI分为Simple SPI和Common SPI。Simple SPI就是本书《第8章 S
 
 所以Common SPI的SPI0的模式和引脚配置结果如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image3.png)  
 
 配置好SPI0的模式和引脚后，就要去RASC的“Stacks”处增加SPI0的Stack模块。在“Stacks”配置界面点击“New Stack”，选择其中的“Connectivity”，再选择里面的“SPI(r_spi)”，此处一定要注意不是选择“SPI(r_sci_spi)”。如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image4.png)  
 
 当新建好一个SPI Stack后，需要去它的“属性”中配置详细的参数。本书根据SPI协议，将SPI Stack的属性分成了8个较为重要的可配置参数，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image5.png)  
 
 ① SPI模块的名称和使用通道：建议名称和通道匹配，例如本章使用的是SPI0，那么通道channel就是0，而名称则对应的是g_spi0；以后使用FSP的API操作SPI0时就可以g_spi0.papi->xxxx()来使用SPI0模块；
 ② 中断优先级设置：此处设置收发完成的中断优先级和错误中断优先级，需要综合考虑工程中其它外设的中断优先级设置，达到更好的系统控制效果；
@@ -420,7 +420,7 @@ fsp_err_t (* writeRead)(spi_ctrl_t * const p_ctrl,
 
 本书使用的外接SPI OLED模块是百问网的SPI OLED模块，外形如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image6.png)  
 
 和处理器的连线如下表所示：
 
@@ -451,13 +451,13 @@ SSD1306支持6800/8080并行接口协议，也支持3线制和4线制的SPI接�
 
 对于4线制SPI接口协议，其通信过程对于片选信号和数据/命令切换信号的要求如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image7.png)  
 
 要启动SPI传输，需要设置CS为低电平以选中目标设备。而DC#信号被用来分辨所传输的SPI数据是“命令”，还是“显存数据”。
 
 SSD1306的4线制SPI通信的时序如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image8.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image8.png)  
 
 可以看到，对于SSD1306而言，它会在时钟信号的低电平期间切换数据，在上升沿采样数据，在时钟信号的高电平期间保持数据，传输的数据都是高位在前低位在后。因而在使用RASC配置SPI的时候就要和这个时钟特性要匹配。
 
@@ -471,15 +471,15 @@ SSD1306的显存写入模式就是它的地址模式，分为：页地址模式�
 
 在页地址模式下，如果往page0的column0写入一个byte的数据，那么column将会从0递增为1；当column递增到横向地址的最大值（满屏为127）时，column会回到0，而页地址page不会变化依然保存为0。因而，在页地址模式下要想将全屏刷新，需要分8次操作：先设置Paga n地址，写入128个字节（n的 取值从0到7）。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image9.png)  
 
 在横向地址模式下，如果往page0的column写入一个byte的数据，那么column将会从0递增为1；当column递增到横向地址的最大值时，column会回到0，而页地址会递增1；如果页地址递增到最大页数，则将回到第0页开始覆盖写。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image10.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image10.png)  
 
 在纵向地址模式下，如果往page0的column0写入一个byte的数据，那么column地址不会变化，而页地址page将会从0递增1，当page递增到最大页地址时，page会回到0地址，而column地址会递增1。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image11.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image11.png)  
 
 在横向地址模式或纵向地址模式下，要刷新全屏的数据，只需要在程序中执行一次发送128*8 bytes的数据到SSD1306即可，地址会自动变化，相比于页地址模式会更方便。
 
@@ -493,7 +493,7 @@ SSD1306的显存写入模式就是它的地址模式，分为：页地址模式�
 
 设置column地址和页地址的方法如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13\image12.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-13/image12.png)  
 
 - 设置column地址的命令是0x21，然后发送2个字节的数据指明起始地址和结束地址；
 - 设置page地址的命令是0x22，然后发送2个字节的数据指明起始地址和结束地址；

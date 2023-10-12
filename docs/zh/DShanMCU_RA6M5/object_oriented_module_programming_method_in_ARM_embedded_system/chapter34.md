@@ -14,7 +14,7 @@ SR04采用5V电压，静态电流小于2mA，感应角度最大约15度，探测
 
 主机通过两条数据线与SR04连接：主机通过Trig引脚发脉冲给SR04，主机检测Echo引脚的高电平时长。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image1.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image1.png) 
 
 SR04模块上面有四个引脚，分别为：VCC、Trig、Echo、GND。
 
@@ -26,7 +26,7 @@ Echo是回响接收引脚，即SR04模块一旦接收到超声波的返回信号
 
 SR04超声波测距模块时序图所下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image2.png)  
 
 要测距，需如下操作：
 
@@ -52,7 +52,7 @@ SR04超声波测距模块时序图所下图所示：
 
 本次实验使用的超声波模块会使用到2个IO：Trig和Echo。P003连接到Trig，将其配置为输出模式：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image3.png)  
 
 P503引脚连接到Echo，使用它的GPT触发功能，触发GPT的计数开启或者停止。
 
@@ -68,15 +68,15 @@ P503引脚连接到Echo，使用它的GPT触发功能，触发GPT的计数开启
 
 RA6M5的P503引脚具有的外设复用功能如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image4.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image4.png) 
 
 本书利用其GPY_POEG2:GTETRGC功能触发GPT，本次实验使用的是GPT0。对于GPT的配置如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image5.png)  
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image6.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image6.png) 
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image7.png)  
 
 这里配置的计数周期值是32位GPT最大计数，这是为了尽可能让测量时间在GPT的一次计数周期内完成，不产生溢出以免增加计算的复杂度。
 
@@ -84,11 +84,11 @@ RA6M5的P503引脚具有的外设复用功能如下图所示：
 
 因为使用到了外部引脚触发GPT的POEG功能，因而还需要添加POEG Stack模块：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image8.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image8.png)  
 
 另外P503是PORG2，所以添加的POEG模块通道要修改为2，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image9.png)  
 
 ## 34.3 驱动程序
 
@@ -292,6 +292,6 @@ void DeviceTest(void)
 
 将程序烧写到开发板上运行可以得到如下图所示的探测结果：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34\image10.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-34/image10.png)
 
  

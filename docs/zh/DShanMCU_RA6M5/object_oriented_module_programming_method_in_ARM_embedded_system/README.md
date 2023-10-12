@@ -42,12 +42,9 @@
 ![](https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/directory.jpg)
 
 
-## 获取《ARM嵌入式系统中面向对象的模块编程方法》离线版本
-
-目前 《ARM嵌入式系统中面向对象的模块编程方法》 在线阅读版本持续更新中，下面是下载PDF版本的链接：
-
-- [ARM嵌入式系统中面向对象的模块编程方法.pdf](https://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/ARM嵌入式系统中面向对象的模块编程方法.pdf)
-
-**【建议下载这个】** 书籍配套的资料、源码、文档下载(已包含 ARM嵌入式系统中面向对象的模块编程方法.pdf)：
+## 配套资料获取
 
 - [http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html](http://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html)
+
+《ARM嵌入式系统中面向对象的模块编程方法》离线版本(PDF)位于配套资料中的位置： `1_用户手册/01_ARM嵌入式系统中面向对象的模块编程方法/ARM嵌入式系统中面向对象的模块编程方法.pdf`
+

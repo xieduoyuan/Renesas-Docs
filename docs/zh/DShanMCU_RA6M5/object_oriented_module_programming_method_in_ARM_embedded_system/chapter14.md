@@ -17,11 +17,11 @@ QSPI是Quad SPI的简写，是Motorola公司推出的SPI接口的扩展协议，
 
 对于Dual SPI（双线串行外设接口），它同样也由4根线共同完成通信：CS/SCK/IO0/IO1，和SPI不同的是，Dual SPI在收发数据的时候是使用2根数据线IO0和IO1进行的，而不是像SPI那样收发数据分别只使用1条数据线。因而，在单向数据传输上，Dual SPI的传输速度是SPI的2倍。Dual SPI是半双工的。
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image1.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image1.png" style="zoom:150%;" /> 
 
 对于Quad SPI（四线串行外设接口），它较之于Dual SPI则是多了2根数据线IO2/IO3。在通信的时候，收发数据使用4根数据线进行，在单向传输上，速率是SPI的4倍，是Dual SPI的2倍。Quad SPI是半双工的。
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image2.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image2.png" style="zoom:150%;" />  
 
 ### 14.1.2 RA6M5系列的QSPI
 
@@ -29,7 +29,7 @@ QSPI是Quad SPI的简写，是Motorola公司推出的SPI接口的扩展协议，
 
 RA6M5的QSPI框图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image3.png)  
 
 通过QSPI模块，可以方便地编写程序，使用QSPI协议访问外设。
 
@@ -57,7 +57,7 @@ RA6M5的QSPI有2种SPI模式：SPI Mode0和SPI Mode3，对应的特点如下：
 
 当使用QSPI连接外部存储设备时，RA6M5系列处理器的地址和外部存储设备的地址映射如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image4.png)  
 
 从图中可以看出，其映射首地址是0x60000000，结束地址是0x68000000，共有128MB大，但是用于映射外部存储器的大小只有低64MB的空间——这就是一个Bank的大小。还可通过QSPI.EXT[5:0]来选择64个Bank（只使用63个Bank），所以QSPI可以访问的最大容量为64MB*63。
 
@@ -83,7 +83,7 @@ RA6M5的QSPI就支持XIP控制方法，通过寄存器SFMXD[7:0]和SFMSDC实现�
 
 本章实验驱动的W25Q64模块为板载模块，原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image5.png)  
 
 W25Q64连接到QSPI0模块，使用的GPIO引脚如下：
 
@@ -100,41 +100,41 @@ W25Q64连接到QSPI0模块，使用的GPIO引脚如下：
 
 在RASC中配置QSPI，首先在RASC的“Pin Configuration”中的“Peripherals”里展开“Storage:QSPI”，选中里面的QSPI0，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image6.png)  
 
 配置QSPI的引脚时，“Pin Group Selection”选择组别时，有混合型Mixed和组别独有型，如图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image7.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image7.png" style="zoom:150%;" />  
 
 在不清楚引脚属于哪一个组别的情况下可以使用Mixed组别来手动指定。
 
 对于QSPI的操作模式“Operation Mode”，支持自定义Custom模式、Single SPI和Dual SPI模式以及Quad SPI模式。如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image8.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image8.png" style="zoom:150%;" />  
 
 本章选择的是Quad SPI模式。
 
 配置完引脚和操作模式后，就要去“Stacks”里添加QSPI的Stack模块。点击“New Stack”，选择里面的“Storage”中的“QSPI(r_qspi)”,如图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image9.png)  
 
 添加了QSPI的Stack模块后再去配置参数。首先是General通用参数，需要在这里设置QSPI的协议、地址位数、读写模式、空闲时钟和页大小等，下图是根据W25Q64的特点进行的设置：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image10.png" style="zoom:150%;" />  
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image10.png" style="zoom:150%;" />  
 
 具体参数参考下表：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image11.PNG)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image11.PNG)
 
 接着是命令定义，也就是设置QSPI通信设备的一些控制命令。FSP默认的一些命令能够满足大部分都QSPI设备，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image12.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image12.png" style="zoom:150%;" /> 
 
 这些命令需要根据通信的设备来设置，需要仔细核对。对于本章使用的W25Q64而言，这些命令都是可以使用的，本章没有对其进行修改，使用的是默认的指令。
 
 最后是QSPI总线的时间设置，如下图所示：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image13.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image13.png" style="zoom:150%;" /> 
 
 在RASC中仅设置QSPI的时钟分频系数、在失能（Deselect）后的片选信号保持高电平的最小时钟个数。同样的也是需要根据通信设备的要求来设置，本章这里还是使用的是默认设置。
 
@@ -457,7 +457,7 @@ while(status.write_in_progress == true)
 
 使用QSPI连接W25Q64的原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image14.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image14.png) 
 
 ### 14.3.2 W25Q64驱动解析
 
@@ -469,9 +469,9 @@ W25Q64是华邦电子的一款支持SPI、扩展SPI（Single/Dual/Quad SPI）接
 
 对于W25Q64的所有操作都是执行对应的指令，因而需要先了解W25Q64支持哪些指令，指令表如下：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image15.PNG)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image15.PNG)
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image16.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image16.png)
 
 - MF7-MF0：制造商ID；
 - ID15-ID8：内存类型；
@@ -483,7 +483,7 @@ W25Q64是华邦电子的一款支持SPI、扩展SPI（Single/Dual/Quad SPI）接
 
 对于W25Q64的各个ID的描述，在手册中有说明，如下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image17.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image17.png) 
 
 如果使用0x9F去读取ID，那么Byte2~Byte4组合起来就是0xEF4017。
 
@@ -493,7 +493,7 @@ W25Q64是华邦电子的一款支持SPI、扩展SPI（Single/Dual/Quad SPI）接
 
 要想对W25Q64进行写操作或者擦除操作，必须要先使能对W25Q64的写功能。写使能的指令是0x06，操作时序是主机发送一个0x06给W25Q64即可。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image18.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image18.png) 
 
 4. 读取W25Q64的状态寄存器
 
@@ -522,21 +522,21 @@ W25Q64有两种写操作：Page Program和Quad Input Page Program。这两者都
 
 下图是Page Program的时序图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image19.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image19.png) 
 
 下图是Quad Input Page Program的时序图： 
 
- ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image20.png)
+ ![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image20.png)
 
 不管是Page Program还是Quad Input Page Program，都只能在已经擦除过的地方写数据，并且必须先发送使能指令0x01。
 
 在页写的时候，如果写入的数据个数少于一页，且和该页已写的数据加起来也不会超过一页的数据量，那么从该页已写数据的末地址开始写入新数据的话不会影响之前已写的数据。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image21.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image21.png) 
 
 当写入的数据加上该页已写入的数据超过一页的数据量，那么超过的数据将会被舍弃，并不会写入到下一页。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image22.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image22.png) 
 
 6. W25Q64的数据擦除操作
 
@@ -568,7 +568,7 @@ f) Fast Read Quad IO(0xEB)
 
 只是在使用Fast Read读取数据的时候，需要根据手册的时序图来设置空读时钟，例如Fast Read Data方式下就需要空读一个字节，如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image23.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image23.png) 
 
 ### 14.3.3 W25Q64驱动程序
 
@@ -663,7 +663,7 @@ d) 数据个数超过一页又该如何写？
 
 考虑到这些问题，本章设计了如下图这样的流程图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image24.png) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image24.png) 
 
 再根据此流程图设计了下面的函数：可以在任意地址处写入任意个数据。
 
@@ -804,6 +804,7 @@ void hal_entry(void)
 
 将编译出来的二进制可执行文件烧录到处理器中运行，然后在串口助手中可以看到如下图这样的调试打印信息：
 
-<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14\image25.png" style="zoom:150%;" /> 
+<img src="http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-14/image25.png" style="zoom:150%;" /> 
 
 读者自行测试的时候，读写的地址和数据个数可能会和本书的不一样。
+

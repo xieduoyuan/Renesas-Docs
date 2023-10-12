@@ -12,7 +12,7 @@
 
 先说什么是“4相永磁式”的概念，28BYJ-48 的内部结构示意图如下所示。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image1.png)
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image1.png)
 
 先看里圈，它上面有8个齿，分别标注为0～7，这个叫做转子，顾名思义，它是要转动的。转子的每个齿上都带有永久的磁性，是一块永磁体，这就是“永磁式”的概念。
 
@@ -36,15 +36,15 @@
 
 下表给出八拍模式下电机绕组激励时序（电机引线颜色可能因厂家不同而不同）：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image2.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image2.png)  
 
 本文将以八拍模式展开编程演示，当按照下表的数值，连续给电机提供激励时，电机就逆时针转起来。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image3.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image3.png)  
 
 28BYJ-48为减速电机，电机输出的转速并不等于转子的转速。下图是这个28BYJ-48步进电机的拆解图，从图中可以看到，位于最中心的那个白色小齿轮才是步进电机的转子输出，64个节拍只是让这个小齿轮转了一圈，然后它带动那个浅蓝色的大齿轮，这就是一级减速。
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image4.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image4.png)  
 
 右上方的白色齿轮的结构，除电机转子和最终输出轴外的3个传动齿轮都是这样的结构，由一层多齿和一层少齿构成，而每一个齿轮都用自己的少齿层去驱动下一个齿轮的多齿层，这样每2个齿轮都构成一级减速，一共就有了4级减速。
 
@@ -52,13 +52,13 @@
 
 根据28BYJ-48电机原理，我们只需要将开发板的四个引脚（通常为GPIO）分别连接到电机，再按照电机的驱动逻辑给出一定的激励信号。但是开发板的GPIO驱动能力有限，需要在开发板和电机之间加入驱动电路，本教程选择了双路有刷直流马达驱动芯片MX1508，驱动电路原理图见下图：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image5.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image5.png)  
 
 开发板的GPIO0~GPIO3引脚直接连接MX1508的INA1、INB1、INA2、INB2。MX1508的输出端OUTA1、OUTB1、OUTA2、OUTB2分别接到步进电机28BYJ-48的A、B、C、D四个线圈。所以，可以通过开发板的4个GPIO引脚，间接控制电机的ABCD。并不是使用4个GPIO简单地控制ABCD，它们不是一一对应的关系。
 
 需要先了解MX1508芯片内部电路和基本工作模式： 
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image6.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image6.png)  
 
 1) 待机模式
 
@@ -84,23 +84,23 @@
 
 综上所述，MX1508的真值表如下：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image7.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image7.png)  
 
 上述真表中，OUTAx/OUTBx输出Z（高阻态）、H（高电平）时，连接到的电机线圈绕组都不会导通，效果是一样的。
 
 为了让ABCD输出8个节拍，可以按照下图控制GPIO0~GPIO3：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image8.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image8.png)  
 
 以第1个节拍为例，想让D输出0，ABC输出高电平或是高阻态，怎么办？换句话说，想让OUTB2=L，OUTA2、OUTA1、OUTB1等于H或Z，怎么办？
 
 根据真值表，设置INA2=H、INB2=L，可以让OUTA2=H、OUTB2=L：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image9.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image9.png)  
 
 继续根据真值表，设置INA1=L、INB1=L，可以让OUTA1=Z、OUTB1=Z：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image10.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image10.png)  
 
 所以，要让D输出0，ABC输出高电平或是高阻态时，需要：INA1=L、INB1=L、INA2=H、INB2=L。即：GPIO0=0、GPIO1＝0、GPIO2=1、GPIO3=0，用二进制表示即为：0b0100，即0x04。
 
@@ -118,7 +118,7 @@ S_CW[8]=  {0x04,0x0c,0x08,0x09,0x01,0x03,0x02,0x06};
 
 本实验使用的步进电机模块会接到扩展板的GPIO组，会使用到4个GPIO来接电机驱动板的INA/B/C/D，扩展板GPIO组原理图如下图所示：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image11.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image11.png)  
 本实验使用的是GPIO0~3，所以需要在RASC中将这4个IO对应的引脚配置为通用输出模式，请读者参考本书前文对于GPIO的配置来配置这4个引脚。
 
 ## 36.4 外设驱动程序
@@ -298,6 +298,6 @@ void DeviceTest(void)
 
 将程序烧写到开发板中运行，打开串口助手，插上步进电机后，通过串口助手输入转角和转速：
 
-![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36\image12.png)  
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-36/image12.png)  
 
 步进电机就会逆时针或者顺时针转动指定的角度
