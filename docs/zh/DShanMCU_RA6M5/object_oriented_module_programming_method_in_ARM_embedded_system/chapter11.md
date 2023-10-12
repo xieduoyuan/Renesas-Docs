@@ -14,8 +14,11 @@ SysTick定时器也被称为滴答定时器。在Cortex架构的处理器里，�
 滴答定时器有4个寄存器用于控制和获取状态：
 
 a) 控制和状态寄存器：SYST_CSR
+
 b) 重载值寄存器：SYST_RVR
+
 c) 当前计数值寄存器：SYST_CVR
+
 d) 校验值寄存器：SYST_CALIB
 
 使用滴答定时器就是对这几个寄存器进行配置让它按照指定的频率进行计数，本章会实现几个驱动函数为后续章节的外设驱动使用。
@@ -25,9 +28,13 @@ d) 校验值寄存器：SYST_CALIB
 在配置滴答定时器前，首先应该要熟悉其工作机制，其工作机制有如下几条：
 
 ① 当使能了滴答定时器的计数后，滴答定时器将会从重载值向下计数到零，然后在下一个时钟周期从重载值寄存器读取重载值，在紧随的下一个时钟周期又开始向下计数。
+
 ② 如果给重载值寄存器RVR写入了一个‘0’，那么本次计数循环（也就是本次向下计数到0）后就会停止计数。
+
 ③ 当计数到0使，控制状态寄存器CSR的计数标志COUNTFLAG位会被置1.，当读取CSR寄存器时会将这一位清零。
+
 ④ 如果给当前计数值寄存器CVR写入一个值时，会更新CVR的值且会将COUNTFLAG清零；
+
 ⑤ 如果程序处于调试状态，当开发者暂停调试时，滴答定时器也会暂停计数；
 
 可以看到，这几个机制中使用到的寄存器只有3个：CSR（Control and Status Register，控制和状态寄存器）、RVR（Reload Value Register，重载值寄存器）和CVR（Current Value Register，当前值寄存器）。接下来就着重认识下这3个寄存器，并且学会如何配置他们。
@@ -72,9 +79,13 @@ CSR寄存器上电复位默认值是0x00000000，一般情况下，程序是需�
 那么开发者配置滴答定时器时，步骤如下：
 
 ① 选择抵达定时器的时钟源；
+
 ② 使能滴答定时器的中断请求；
+
 ③ 设置重载值；
+
 ④ 清零当前计数值；
+
 ⑤ 使能滴答定时器计数；
 
 1. 初始化滴答定时器
@@ -115,13 +126,13 @@ fsp_err_t SystickInit(void)
 }
 ```
 
-如上初始化滴答定时器后，它的计数时钟频率就是处理器的系统主频![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps186.jpg)，
+如上初始化滴答定时器后，它的计数时钟频率就是处理器的系统主频!![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image6.png)  ，
 
-在此频率下向下计数![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps187.jpg)个数后触发中断，也就是每秒钟触发1000次中断，换算公式如下：
+在此频率下向下计数![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image7.png)  个数后触发中断，也就是每秒钟触发1000次中断，换算公式如下：
 
-![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps188.jpg) 
+![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image8.png)  
 
-假如![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps189.jpg)，那么传入给SysTick_Config函数的值就是200K，滴答定时器就会以200MHz的频率从200K往0开始递减，递减为0时触发一次中断，中断触发频率就是![img](file:///C:\Users\myj\AppData\Local\Temp\ksohtml21652\wps190.jpg)。
+假如![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image9.png)  ，那么传入给SysTick_Config函数的值就是200K，滴答定时器就会以200MHz的频率从200K往0开始递减，递减为0时触发一次中断，中断触发频率就是![](http://photos.100ask.net/renesas-docs/DShanMCU_RA6M5/object_oriented_module_programming_method_in_ARM_embedded_system/chapter-11\image10.png)  。
 
 2. 实现滴答定时器的中断服务函数
 
