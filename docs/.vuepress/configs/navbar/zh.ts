@@ -15,6 +15,10 @@ export const navbarZh: NavbarConfig = [
     link: '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/',
   },
   {
+    text: 'FreeRTOS入门与工程实践-基于瑞萨RA6M5',
+    link: '/zh/DShanMCU_RA6M5/FreeRTOS/',
+  },
+  {
     text: `瑞萨系列`,
     children: [
       {

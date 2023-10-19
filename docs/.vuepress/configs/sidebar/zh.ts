@@ -83,4 +83,13 @@ export const sidebarZh: SidebarConfig = {
       ],
     },
   ],
+  '/zh/DShanMCU_RA6M5/FreeRTOS': [
+    {
+      text: 'FreeRTOS入门与工程实践',
+      collapsible: true,
+      children: [
+        '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/README.md',
+      ],
+    },
+  ],
 }
