@@ -97,6 +97,7 @@ export const sidebarZh: SidebarConfig = {
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter14.md',
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter15.md',
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter16.md',
+        '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter17.md',
       ],
     },
   ],
