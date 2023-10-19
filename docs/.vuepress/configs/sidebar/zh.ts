@@ -89,6 +89,7 @@ export const sidebarZh: SidebarConfig = {
       collapsible: true,
       children: [
         '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/README.md',
+        '/zh/DShanMCU_RA6M5/lvgl_port_special_tutorial/chapter9.md',
       ],
     },
   ],
